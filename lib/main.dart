@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reader/models/book.dart';
-import 'package:reader/network/network.dart';
-import 'package:reader/pages/favorite_page.dart';
+import 'package:reader/pages/book_details.dart';
+import 'package:reader/pages/favorites_page.dart';
 import 'package:reader/pages/home_page.dart';
 import 'package:reader/pages/saved_page.dart';
 
@@ -23,8 +22,9 @@ class MainApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/home': (context) => const HomePage(),
-        '/favorite': (context) => const FavoritePage(),
+        '/favorites': (context) => const FavoritesPage(),
         '/saved': (context) => const SavedPage(),
+        '/details': (context) => const BookDetailsPage(),
       },
       home: const Home(),
     );
@@ -43,8 +43,8 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _screens = [
     const HomePage(),
-    const FavoritePage(),
     const SavedPage(),
+    const FavoritesPage(),
   ];
 
   @override
