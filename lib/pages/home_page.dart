@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reader/components/gridview_widget.dart';
 import 'package:reader/models/book.dart';
 import 'package:reader/network/network.dart';
 
@@ -10,8 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Book> _books = [];
   Network network = Network();
+  List<Book> _books = [];
 
   Future<void> _getBooks(String query) async {
     try {
@@ -19,17 +20,14 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _books = books;
       });
-    } catch (e) {
-      setState(() {});
-    }
+      // ignore: empty_catches
+    } catch (e) {}
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Reader'),
-      ),
       body: Center(
         child: Column(
           children: [
@@ -37,7 +35,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 decoration: const InputDecoration(
-                  hintText: 'Search',
+                  hintText: 'Search a book',
                   suffixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -46,18 +44,7 @@ class _HomePageState extends State<HomePage> {
                 onSubmitted: (value) => _getBooks(value),
               ),
             ),
-            // GridViewWidget(books: _books),
-            Expanded(
-                child: SizedBox(
-                    width: double.infinity,
-                    child: ListView.builder(
-                        itemCount: _books.length,
-                        itemBuilder: (context, index) {
-                          Book book = _books[index];
-                          return ListTile(
-                            title: Text(book.title),
-                          );
-                        })))
+            GridViewWidget(books: _books),
           ],
         ),
       ),
