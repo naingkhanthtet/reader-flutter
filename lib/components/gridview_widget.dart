@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reader/models/book.dart';
+import 'package:reader/utils/book_details_arguments.dart';
 
 class GridViewWidget extends StatelessWidget {
   const GridViewWidget({super.key, required List<Book> books}) : _books = books;
@@ -24,8 +25,19 @@ class GridViewWidget extends StatelessWidget {
                     borderRadius: const BorderRadius.all(
                       Radius.circular(10.0),
                     )),
+                // Book container leads to book details
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    // navigate to book details
+                    Navigator.pushNamed(
+                      context,
+                      '/details',
+                      arguments: BookDetailsArguments(
+                        itemBook: book,
+                        isSaved: false,
+                      ),
+                    );
+                  },
                   child: Column(
                     children: [
                       // Book cover
