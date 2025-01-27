@@ -20,6 +20,12 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true),
+      initialRoute: '/',
+      routes: {
+        '/home': (context) => const HomePage(),
+        '/favorite': (context) => const FavoritePage(),
+        '/saved': (context) => const SavedPage(),
+      },
       home: const Home(),
     );
   }
@@ -44,28 +50,26 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Reader'),
-      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      // ),
-      body: Center(
-        child: _screens[_currentIndex],
+      appBar: AppBar(
+        title: const Text('Reader'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
+      body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.save),
-            label: 'Save',
+            label: 'Saved',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: 'Favorite',
+            label: 'Favorites',
           ),
         ],
         selectedItemColor: Theme.of(context).colorScheme.onInverseSurface,
