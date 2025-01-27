@@ -1,3 +1,3 @@
-# reader
+# Reader
 
-A new Flutter project.
+A Book Flutter project.
